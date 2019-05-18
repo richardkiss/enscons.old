@@ -33,6 +33,7 @@ prefs = []
 try:
     import SCons.Script
 except ImportError:
+    del sys.modules["SCons"]  # or it won't try again
     try:
         # empty scons directory (lowercase) is also a Python 3 namespace package
         import scons
