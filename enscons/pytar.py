@@ -43,11 +43,14 @@ def tar(target, source, env):
     tarformat = env.get("TARFORMAT", None)
     tarroot = str(env.get("TARROOT", ""))
     tarprefix = str(env.get("TARPREFIX", ""))
+    tarsuffix = str(env.get("TARSUFFIX", ""))
     taruid = env.get("TARUID")
     targid = env.get("TARGID")
     tarmtime = env.get("TARMTIME")
+
+    target_path = "%s%s" % (str(target[0]), tarsuffix)
     with tarfile.TarFile.open(
-        str(target[0]), "w" + (compression and ":") + compression, format=tarformat
+        target_path, "w" + (compression and ":") + compression, format=tarformat
     ) as tar:
 
         def _filter(info):
